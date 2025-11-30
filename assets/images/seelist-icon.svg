@@ -1,29 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <!-- Heart Path Definition -->
-    <path id="heart-path" d="M 50 90 C 10 60 0 35 25 15 C 40 5 50 25 50 25 C 50 25 60 5 75 15 C 100 35 90 60 50 90 Z" />
-
-    <!-- Gradient for the Film Strip Base -->
-    <linearGradient id="film-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF3B30" /> <!-- Red (Left) -->
-      <stop offset="50%" stop-color="#007AFF" /> <!-- Blue (Right) -->
-      <stop offset="100%" stop-color="#34C759" /> <!-- Green (Bottom) -->
-    </linearGradient>
+    <!-- Rounded Play Button Shape for Clipping -->
+    <clipPath id="play-button-clip">
+      <path d="M 35 20 L 85 50 L 35 80 A 5 5 0 0 1 28 75 L 28 25 A 5 5 0 0 1 35 20 Z" />
+    </clipPath>
   </defs>
 
-  <!-- Heartbeat Animation Group -->
-  <g transform-origin="50 50">
-    <animateTransform attributeName="transform" type="scale" values="1; 1.05; 1" dur="2s" repeatCount="indefinite"
-      calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+  <!-- Floating Animation Wrapper -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -4; 0 0" dur="3s"
+      repeatCount="indefinite" />
 
-    <!-- Film Strip Base (Thick Colored Stroke) -->
-    <use href="#heart-path" fill="none" stroke="url(#film-gradient)" stroke-width="16" stroke-linecap="round"
-      stroke-linejoin="round" />
+    <!-- Main Group with Clip Path -->
+    <g clip-path="url(#play-button-clip)">
 
-    <!-- Sprocket Holes (Dashed White Line) -->
-    <use href="#heart-path" fill="none" stroke="white" stroke-width="4" stroke-dasharray="0 10" stroke-linecap="round"
-      opacity="0.9">
-      <animate attributeName="stroke-dashoffset" values="0; -200" dur="5s" repeatCount="indefinite" calcMode="linear" />
-    </use>
+      <!-- Background (Bottom - Red) -->
+      <rect x="0" y="0" width="100" height="100" fill="#FF3B30" />
+
+      <!-- Middle Layer (Green) -->
+      <path fill="#34C759">
+        <animate attributeName="d" values="M 0 60 Q 25 55 50 60 T 100 60 V 0 H 0 Z;
+                  M 0 60 Q 25 65 50 60 T 100 60 V 0 H 0 Z;
+                  M 0 60 Q 25 55 50 60 T 100 60 V 0 H 0 Z" dur="2s" repeatCount="indefinite" />
+      </path>
+
+      <!-- Top Layer (Blue) -->
+      <path fill="#007AFF">
+        <animate attributeName="d" values="M 0 35 Q 25 40 50 35 T 100 35 V 0 H 0 Z;
+                  M 0 35 Q 25 30 50 35 T 100 35 V 0 H 0 Z;
+                  M 0 35 Q 25 40 50 35 T 100 35 V 0 H 0 Z" dur="2.5s" repeatCount="indefinite" />
+      </path>
+
+      <!-- Shine/Gloss Effect (Optional, subtle overlay) -->
+      <path d="M 0 0 L 100 0 L 100 100 Z" fill="white" opacity="0.1" />
+    </g>
+
+    <!-- Outline (Optional, to define shape better on white backgrounds) -->
+    <path d="M 35 20 L 85 50 L 35 80 A 5 5 0 0 1 28 75 L 28 25 A 5 5 0 0 1 35 20 Z" fill="none" stroke="rgba(0,0,0,0.1)"
+      stroke-width="2" />
   </g>
 </svg>
